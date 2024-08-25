@@ -6,7 +6,7 @@ from src.logger import logging
 from src.exception import CustomException
 import dill
 
-def save_obj(file_path,obj):
+def save_object(file_path,obj):
     try:
         dir_path=os.path.dirname(file_path)
         os.makedirs(dir_path,exist_ok=True)

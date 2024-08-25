@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler,OneHotEncoder
 import os
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import save_obj 
+from src.utils import save_object 
 @dataclass
 class DataTransformationConfig:
     preprocessor_obj_file_path=os.path.join('artifacts','preprocessor.pkl')
@@ -20,7 +20,7 @@ class DataTransformation:
     def get_data_transformer_object(self):
         try:
             numerical_columns=["writing_score","reading_score"]
-            categorical_columns=["gender","race_ethnicity","parental_level_op_education","lunch","test_preparation_course"]
+            categorical_columns=["gender","race_ethnicity","parental_level_of_education","lunch","test_preparation_course"]
             num_pipeline=Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy="median")),
@@ -30,8 +30,8 @@ class DataTransformation:
             cat_pipeline=Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy="most_frequent")),
-                    ("one_hot_encode",OneHotEncoder()),
-                    ("scaler",StandardScaler())
+                    ("one_hot_encode",OneHotEncoder(handle_unknown='ignore')),
+                    ("scaler",StandardScaler(with_mean=False))
                 ]
             )
             logging.info("cat and num columns defined and pipelines also defined")
@@ -54,7 +54,7 @@ class DataTransformation:
             preprocessor_obj=self.get_data_transformer_object()
             target_column_name="math_score"
             numerical_columns=["writing_score","reading_score"]
-            categorical_columns=["gender","race_ethnicity","parental_level_op_education","lunch","test_preparation_course"]
+            categorical_columns=["gender","race_ethnicity","parental_level_of_education","lunch","test_preparation_course"]
             
             input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
             target_feature_train_df=train_df[target_column_name]
