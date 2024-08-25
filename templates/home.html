@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Prediction</title>
+</head>
+<body>
+    <h2>Student Performance Prediction Form</h2>
+    <form action="{{ url_for('predict_datapoint') }}" method="POST">
+        
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+
+        <label for="lunch">Lunch Type:</label>
+        <select id="lunch" name="lunch">
+            <option value="standard">Standard</option>
+            <option value="free/reduced">Free/Reduced</option>
+        </select><br><br>
+
+        <label for="test_preparation_course">Test Preparation Course:</label>
+        <select id="test_preparation_course" name="test_preparation_course">
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+        </select><br><br>
+
+        <label for="race_ethnicity">Race/Ethnicity:</label>
+        <select id="race_ethnicity" name="race_ethnicity">
+            <option value="group A">Group A</option>
+            <option value="group B">Group B</option>
+            <option value="group C">Group C</option>
+            <option value="group D">Group D</option>
+            <option value="group E">Group E</option>
+        </select><br><br>
+
+        <label for="parental_level_of_education">Parental Level of Education:</label>
+        <select id="parental_level_of_education" name="parental_level_of_education">
+            <option value="high school">High School</option>
+            <option value="some high school">Some High School</option>
+            <option value="associate's degree">Associate's Degree</option>
+            <option value="bachelor's degree">Bachelor's Degree</option>
+            <option value="master's degree">Master's Degree</option>
+            <option value="some college">Some College</option>
+        </select><br><br>
+         
+        <label for="reading_score">Reading Score:</label>
+        <input type="number" step="1" id="reading_score" name="reading_score" required><br><br>
+
+        <label for="writing_score">Writing Score:</label>
+        <input type="number" step="1" id="writing_score" name="writing_score" required><br><br>
+
+        
+
+
+        <input type="submit" value="Predict">
+    </form>
+    <h2>the predicted score is {{results}}</h2>
+</body>
+</html>
